@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5000;
 // MongoDB connection
 // -------------------
 const MONGO_URI =
-  process.env.MONGO_URI || "mongodb://root:Yrk%402025@72.60.221.95:27018/";
+  process.env.MONGO_URI || "mongodb://root:Yrk%402025@72.60.221.95:27018/yrk-premium-calc";
 
 mongoose.set("strictQuery", true);
 mongoose

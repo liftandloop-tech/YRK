@@ -6,13 +6,13 @@ const { body, validationResult } = require("express-validator");
 const mongoose = require("mongoose");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 
 // -------------------
 // MongoDB connection
 // -------------------
 const MONGO_URI =
-  process.env.MONGO_URI || "mongodb+srv://liftandloop_db_user:rREXHGeIfgBghSLG@yrk-data.jvikpln.mongodb.net/?appName=YRK-Data" ;
+  process.env.MONGO_URI || "mongodb+srv://liftandloop_db_user:rREXHGeIfgBghSLG@yrk-data.jvikpln.mongodb.net/yrk-premium-calc?retryWrites=true&w=majority" ;
 
 mongoose.set("strictQuery", true);
 mongoose

@@ -113,20 +113,28 @@ app.post(
 // -------------------
 app.post("/api/login", async (req, res) => {
   try {
-    const { email, password } = req.body || {};
-    if (!email || !password)
-      return res
-        .status(400)
-        .json({ success: false, message: "Email and password required" });
+    const { phone, email, password } = req.body || {};
+    const identifier = phone ?? email;
 
-    const user = await User.findOne({
-      email: String(email).toLowerCase(),
-    }).exec();
+    if (!identifier || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Phone (or email) and password are required",
+      });
+    }
 
-    if (!user)
+    // Allow login by phone (preferred) or email for backward compatibility
+    const query = phone
+      ? { phone: String(phone).trim() }
+      : { email: String(email).toLowerCase().trim() };
+
+    const user = await User.findOne(query).exec();
+
+    if (!user) {
       return res
         .status(401)
         .json({ success: false, message: "Invalid credentials" });
+    }
 
     // 👇 compare plain text password directly
     if (String(password) !== String(user.password)) {
